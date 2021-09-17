@@ -1,0 +1,17 @@
+version: "3.5"
+services:
+  api_clients:
+    container_name: api-clients
+    image: docker.privjaac.com/pragma/co-com-pragma-api-clients:latest
+    restart: always
+    hostname: api.privjaac.com
+    build:
+      context: .
+    ports:
+      - "9904:9904"
+    networks:
+      - net_jaac
+networks:
+  net_jaac:
+    name: net_jaac
+    driver: bridge

@@ -33,14 +33,27 @@ spring:
       platform: postgresql
 
 server:
-  port: 9902
+  port: 9904
 logging:
   file:
     name: /opt/app-config/log/${spring.application.name}.log
+
+eureka:
+  client:
+    service-url:
+      defaultZone: https://${eureka.instance.hostname}/eureka
+  instance:
+    hostname: eureka.privjaac.com
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, refresh, logfile
 
 app:
   api:
     client:
       photo:
         name: photo-client-feign
-        url: http://127.0.0.1:9903/api/photos
+        url: https://api.privjaac.com/api/photos

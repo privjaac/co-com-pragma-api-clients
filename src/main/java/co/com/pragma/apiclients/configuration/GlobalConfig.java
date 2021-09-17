@@ -1,23 +1,19 @@
 package co.com.pragma.apiclients.configuration;
 
-import feign.codec.Encoder;
-import feign.codec.Decoder;
-import feign.form.spring.SpringFormEncoder;
-import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
-import org.springframework.cloud.openfeign.support.SpringDecoder;
-import org.springframework.cloud.openfeign.support.SpringEncoder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.server.WebFilter;
-
+import springfox.documentation.oas.annotations.EnableOpenApi;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
 
 import java.util.Objects;
 
+@EnableOpenApi
 @EnableAsync(proxyTargetClass = true)
 @Configuration
 public class GlobalConfig {
@@ -38,15 +34,9 @@ public class GlobalConfig {
          return chain.filter(exchange.mutate().request(request.mutate().contextPath(basePath).build()).build());
       };
    }
-   private final ObjectFactory<HttpMessageConverters> messageConverters = HttpMessageConverters::new;
 
    @Bean
-   Encoder feignFormEncoder() {
-      return new SpringFormEncoder(new SpringEncoder(messageConverters));
-   }
-
-   @Bean
-   Decoder feignFormDecoder() {
-      return new SpringDecoder(messageConverters);
+   public Docket api() {
+      return new Docket(DocumentationType.OAS_30).pathMapping(basePath);
    }
 }

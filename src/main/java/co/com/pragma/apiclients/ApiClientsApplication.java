@@ -3,10 +3,12 @@ package co.com.pragma.apiclients;
 import co.com.pragma.apiclients.web.client.configuration.GlobalClientConfiguration.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+@EnableEurekaClient
 @EnableFeignClients(defaultConfiguration = UnsecuredTSL.class)
 @EnableJpaAuditing
 @EnableScheduling
