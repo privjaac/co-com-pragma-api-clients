@@ -44,7 +44,8 @@ eureka:
       defaultZone: https://${eureka.instance.hostname}/eureka
   instance:
     hostname: eureka.privjaac.com
-    home-page-url-path: ${spring.webflux.base-path}
+    status-page-url-path: ${spring.webflux.base-path}/actuator/info
+    health-check-url-path: ${spring.webflux.base-path}/actuator/health
 
 management:
   endpoints:
