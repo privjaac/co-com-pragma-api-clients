@@ -41,7 +41,7 @@ logging:
 eureka:
   client:
     service-url:
-      defaultZone: https://${eureka.instance.hostname}/eureka
+      defaultZone: https://eureka.privjaac.com/eureka
   instance:
     hostname: api.privjaac.com
     home-page-url-path: ${spring.webflux.base-path}
